@@ -1,3 +1,5 @@
+///////MainActivity.java///////
+
 Packagecom.example.exn
 Importandroid.app.AlarmManager;
 Importandroid.app.PendingIntent;
@@ -48,5 +50,31 @@ publicclassMainActivity extendsAppCompatActivity
               alarmManager.cancel(pendingIntent);
               Toast.makeText(MainActivity.this, "ALARM OFF", Toast.LENGTH_SHORT).show();
          }
+     }
+}
+
+//////AlarmReceiver.java//////
+
+package com.example.exno11;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.widget.Toast;
+public class AlarmReceiver extends BroadcastReceiver
+{
+      @Override
+     public void onReceive(Context context, Intent intent)
+      {
+          Toast.makeText(context, "Alarm! Wake up! Wake up!", Toast.LENGTH_LONG).show();
+           Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+          if(alarmUri == null)
+           {
+               alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+           }
+           Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+          ringtone.play();
      }
 }
